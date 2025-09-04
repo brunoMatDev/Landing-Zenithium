@@ -1,8 +1,8 @@
 import { useState } from "react";
-import { Section } from "@/components/ui/section";
-import { Button } from "@/components/ui/button-glow";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
+import { Section } from "../ui/section";
+import { Button } from "../ui/button-glow";
+import { Input } from "../ui/input";
+import { Textarea } from "../ui/textarea";
 import { 
   Mail, 
   Phone, 
@@ -15,7 +15,7 @@ import {
   Twitter
 } from "lucide-react";
 
-const Contact = () => {
+export default function Contact() {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -23,18 +23,18 @@ const Contact = () => {
     message: ''
   });
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    // Handle form submission
+  function handleSubmit(event) {
+    event.preventDefault();
     console.log('Form submitted:', formData);
-  };
+  }
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  function handleChange(event) {
+    const { name, value } = event.target;
     setFormData(prev => ({
       ...prev,
-      [e.target.name]: e.target.value
+      [name]: value
     }));
-  };
+  }
 
   return (
     <Section id="contact" className="bg-gradient-to-b from-background to-surface/50">
@@ -48,7 +48,6 @@ const Contact = () => {
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
-        {/* Contact Info */}
         <div className="space-y-8">
           <div>
             <h3 className="text-3xl font-bold mb-6 text-foreground">
@@ -92,7 +91,6 @@ const Contact = () => {
             </div>
           </div>
 
-          {/* Social Links */}
           <div>
             <h4 className="text-lg font-semibold mb-4 text-foreground">Síguenos</h4>
             <div className="flex gap-4">
@@ -108,7 +106,6 @@ const Contact = () => {
             </div>
           </div>
 
-          {/* CTA Buttons */}
           <div className="space-y-4 pt-6">
             <Button variant="neon" size="lg" className="w-full hover-lift">
               <Calendar className="w-5 h-5" />
@@ -121,7 +118,6 @@ const Contact = () => {
           </div>
         </div>
 
-        {/* Contact Form */}
         <div className="glass-card p-8 hover-glow">
           <h3 className="text-2xl font-bold mb-6 text-foreground">
             Cuéntanos sobre tu <span className="gradient-text">Proyecto</span>
@@ -205,6 +201,4 @@ const Contact = () => {
       </div>
     </Section>
   );
-};
-
-export default Contact;
+}
